@@ -16,15 +16,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: false
     },
-    avatar: {
+    image: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    firstName: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    lastName: {
+    name: {
       type: DataTypes.STRING(255),
       allowNull: true
     }

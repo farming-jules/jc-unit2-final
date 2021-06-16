@@ -1,0 +1,123 @@
+<!-- 
+<div id="signup-modal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sign up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Sign up</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- Modal -->
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sign Up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="signupForm" role="form" novalidate>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Your name" required>
+            <div class="invalid-feedback">Name is Required</div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="signup-email" name="email" placeholder="Your email address" required>
+            <div class="invalid-feedback">Email is Required</div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="signup-password" name="password" placeholder="Your password here" required minlength="6">
+            <div class="invalid-feedback">Password is Required and must at least be 6 character long</div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="signup-btn" type="submit" class="btn btn-primary">Sign Up!</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+  // (function() {
+  //   'use strict';
+  //   window.addEventListener('load', function() {
+  //     // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  //     var forms = document.getElementsByClassName('needs-validation');
+  //     // Loop over them and prevent submission
+  //     var validation = Array.prototype.filter.call(forms, function(form) {
+  //       form.addEventListener('submit', function(event) {
+  //         if (form.checkValidity() === false) {
+  //           event.preventDefault();
+  //           event.stopPropagation();
+  //         }
+  //         form.classList.add('was-validated');
+  //       }, false);
+  //     });
+  //   }, false);
+  // })();
+
+  $(document).ready(function() {
+    $('#signup-modal').on('show.bs.modal', function (event) {
+      $('#signupForm')[0].reset()
+      $(`#signupForm .is-invalid`).removeClass('is-invalid')
+      $('#signupForm .invalid-feedback').text('')
+    })
+
+    $('#signupForm').on('input', '.is-invalid', function(e) {
+      $(e.target).removeClass('is-invalid').siblings('.invalid-feedback').text('')
+    })
+
+    $("#signup-btn").click(function() {
+      let formData = $("#signupForm").serializeArray()
+
+      $.post("/api/auth/signup", $("#signupForm").serialize()).done(function(data) {
+        $('#signup-modal').modal('hide')
+        $('#login-modal').modal('show')
+      }).fail(function(xhr) {
+        switch(xhr.status) {
+          case 406:
+            $(`#signupForm .is-invalid`).removeClass('is-invalid')
+            $('#signupForm .invalid-feedback').text('')
+
+            xhr.responseJSON.errors.forEach(function(errorObj) {
+              const $input = $(`#signupForm [name="${errorObj.param}"]`)
+              const $feedback = $input.siblings('.invalid-feedback')
+              $input.addClass('is-invalid')
+              $feedback.text(errorObj.msg)
+            })
+            break;
+          default:
+            console.log(xhr)
+        }
+      })
+    })
+
+    // axios({
+    //   method: 'post',
+    //   url: '/auth/signup',
+    //   data: new FormData($("#signupForm")[0])
+    // }).then(function(response) {
+    //   console.log(response.data)
+    // }).catch(function(err) {
+    //   // ANY 4xx, 5xx
+    // }).then(function(){
+    //   // always execute
+    // })  
+  })
+</script>

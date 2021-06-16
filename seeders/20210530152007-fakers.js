@@ -12,14 +12,15 @@ module.exports = {
       await User.create({
         email: `${i}@test.com`,
         passwordHash: await bcrypt.hash('123456', 10),
+        name: Faker.Name.name(),
         AuctionItems: [
           {
-            name: Faker.Beer.name(),
+            title: Faker.Beer.name(),
             description: Faker.Lorem.sentence(2),
             price: Faker.Number.between(10, 200),
             image: Faker.LoremPixel.image("300x300")
           }, {
-            name: Faker.Beer.name(),
+            title: Faker.Beer.name(),
             description: Faker.Lorem.sentence(2),
             price: Faker.Number.between(10, 200),
             image: Faker.LoremPixel.image("300x300")

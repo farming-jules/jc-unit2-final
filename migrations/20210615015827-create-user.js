@@ -18,13 +18,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      avatar: {
+      image: {
         type: Sequelize.STRING
       },
-      firstName: {
-        type: Sequelize.STRING
-      },
-      lastName: {
+      name: {
         type: Sequelize.STRING
       },
       createdAt: {

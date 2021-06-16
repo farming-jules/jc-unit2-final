@@ -1,0 +1,17 @@
+<%- contentFor('meta') %>
+<title>Auction Show</title>
+<%- contentFor('styles') %>
+<%- contentFor('scripts') %>
+<%- contentFor('body') %>
+<div id="my-auction-show" class="container my-3 text-center">
+  <h1 class="my-3"> Showing all Auction <span><%= auction.id %></span></h1>
+  <img
+    class="mr-3 mb-3"
+    src="<%= auction.User && auction.User.image ? auction.User.image : 'https://i1.wp.com/www.mnleadership.org/wp-content/uploads/2017/02/Anonymous-Avatar.png?ssl=1' %>"
+    alt="image"
+    style="width: 100px; height: auto;"
+  >
+  <h1 class="mb-3"><%= auction.title %></h1>
+  <h2 class="mb-3"><%= auction.description%></h2>
+  <h2 class="mb-3"><%= auction.price%></h2>
+</div>

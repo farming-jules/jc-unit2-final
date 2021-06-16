@@ -3,6 +3,21 @@
 <%- contentFor('styles') %>
 <%- contentFor('scripts') %>
 <%- contentFor('body') %>
-<div id="home" class="container my-3">
-  <h1 class="text-center mb-3">Home Page</h1>
+
+<div id="my-auction-show" class="container-fluid my-3 text-center">
+  <% if (auctionItems.length > 0) { %> 
+    <h1 class="my-3">Showing All Auction</h1>
+
+
+    <div class="row" text="left">
+    <% auctionItems.forEach(function(item) { %> 
+        <div class="col col-lg-3">
+          <%- include('../../_partials/item_card', { item: item}) %>
+        </div>
+    <% }) %> 
+  <% } else { %> 
+    <h1>No Auction</h1>
+  <% } %> 
+    </div>
 </div>
+

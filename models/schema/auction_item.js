@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    name: {
+    title: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
@@ -19,12 +19,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    UserId: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
     image: {
       type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    UserId: {
+      type: DataTypes.INTEGER,
       allowNull: true
     }
   }, {

@@ -1,24 +1,3 @@
-<!-- 
-<div id="signup-modal" class="modal fade" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Sign up</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Sign up</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <!-- Modal -->
 <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
@@ -54,24 +33,6 @@
 </div><!-- /.modal -->
 
 <script>
-  // (function() {
-  //   'use strict';
-  //   window.addEventListener('load', function() {
-  //     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  //     var forms = document.getElementsByClassName('needs-validation');
-  //     // Loop over them and prevent submission
-  //     var validation = Array.prototype.filter.call(forms, function(form) {
-  //       form.addEventListener('submit', function(event) {
-  //         if (form.checkValidity() === false) {
-  //           event.preventDefault();
-  //           event.stopPropagation();
-  //         }
-  //         form.classList.add('was-validated');
-  //       }, false);
-  //     });
-  //   }, false);
-  // })();
-
   $(document).ready(function() {
     $('#signup-modal').on('show.bs.modal', function (event) {
       $('#signupForm')[0].reset()

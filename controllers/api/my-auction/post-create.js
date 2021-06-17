@@ -19,7 +19,7 @@ const apiMyAuctionUpdate = async function(req, res) {
   const { locals: { currentUser } } = res
   const { body: userParams } = req
 
-  const auction = await currentUser.createAuctionItem(userParams, { fields: permittedParams })
+  const auction = await currentUser.createProduct(userParams, { fields: permittedParams })
   await auction.update({ image: req.file.location }, { fields: permittedParams })
 
   res.status(200).json(auction)

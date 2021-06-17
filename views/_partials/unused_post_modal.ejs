@@ -1,24 +1,22 @@
-
 <!-- Modal -->
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Log in here</h5>
+        <h5 class="modal-title">Post new product</h5>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body">
-        <form id="loginForm" role="form">
-          <h5 id="login-form-msg" class="text-danger"></h5>
+        <form id="postForm" role="form">
+          <h5 id="post-form-msg" class="text-danger"></h5>
           <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="login-email" name="email" placeholder="Your email address">
-            <div class="invalid-feedback">Wrong Email</div>
+            <label for="text">Title</label>
+            <input type="text" class="form-control" name="title" placeholder="Apple Mac Air">
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="login-password" name="password" placeholder="Your password here">
-            <div class="invalid-feedback">Wrong Password</div>
+            <label for="text">Description</label>
+            <input type="text" class="form-control" rows="3" name="description" placeholder="Screen size: 16 inch, bought in 2012">
+          </div>
           </div>
         </form>
       </div>
@@ -40,13 +38,14 @@
     $("#login-btn").click(function() {
       $.post("/api/auth/login", $("#loginForm").serialize()).done(function(data) {
         window.location.href = "/"
+        console.log('hi')
       }).fail(function(xhr) {
         switch(xhr.status) {
           case 401: // Credentials is incorrect
           case 404: // User not found with email
             $('#login-form-msg').text(xhr.responseJSON.message)
             break
-          case 406: //no input
+          case 406: //no input. this is complete
             $(`#loginForm .is-invalid`).removeClass('is-invalid')
             $('#loginForm .invalid-feedback').text('')
 

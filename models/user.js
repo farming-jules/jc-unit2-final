@@ -5,7 +5,8 @@ const UserSchema = require('./schema/user')
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      User.AuctionItems = this.hasMany(models.AuctionItem)
+      User.Products = this.hasMany(models.AuctionItem, { as: 'Products', foreignKey: 'OwnerId' })
+      User.Orders = this.hasMany(models.AuctionItem, { as: 'Orders', foreignKey: 'BuyerId' })
       User.AuthenticityTokens = this.hasMany(models.AuthenticityToken)
     }
   };

@@ -1,7 +1,16 @@
-const { authenticateCurrentUserByToken } = require('../../_helpers')
+const { AuctionItem } = require('../../../models')
 
-const pagesMyAuctionShow = function(req, res) {
-  res.render('pages/my-auction/show')
+const pagesMyAuctionShow = async function(req, res) {
+  const { params: { id } } = req
+  const auction = await AuctionItem.findOne({
+    where: {
+      id: Number(id) || 0
+    },
+    include: AuctionItem.Owner
+  })
+
+  res.render('pages/my-auction/show', { auction })
 }
-
-module.exports = [authenticateCurrentUserByToken('html'), pagesMyAuctionShow]
+  
+module.exports = [pagesMyAuctionShow]
+  

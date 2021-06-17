@@ -1,18 +1,57 @@
 <%- contentFor('meta') %>
 <title>Home Page</title>
 <%- contentFor('styles') %>
+<style>
+#my-auction-show {
+  display: inline-block
+}
+
+</style>
+
+
 <%- contentFor('scripts') %>
+<script>
+$(document).ready(function() {
+  $('#my-auction-show .buy-btn').on('click', function(e){
+    const itemID = $(e.target).data('id')
+    $('#buy-modal').data('id', itemID).modal('show')
+  })
+})
+</script>
+
+
 <%- contentFor('body') %>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style="display:none">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-interval="2500">
+        <img src="https://www.testbirds.com/wp-content/uploads/remote-testing-visual.svg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-interval="2500">
+      <img src="https://www.mairie-francheville69.fr/wp-content/uploads/2017/11/image-test-1.jpeg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" data-interval="2500">
+      <img src="https://i1.wp.com/www.aftvnews.com/wp-content/uploads/2015/10/amazon-logo.png?w=800&quality=100&ssl=1" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
-<div id="my-auction-show" class="container-fluid my-3 text-center">
+
+<div id="my-auction-show" class="container-fluid text-center">
   <% if (auctionItems.length > 0) { %> 
-    <h1 class="my-3">Showing All Auction</h1>
+    <h1 class="m-3">Showing All Available Items</h1>
 
-
-    <div class="row" text="left">
+    <div class="card-columns">
     <% auctionItems.forEach(function(item) { %> 
         <div class="col col-lg-3">
-          <%- include('../../_partials/item_card', { item: item}) %>
+          <%- include('../../_partials/item_card', { item: item }) %>
         </div>
     <% }) %> 
   <% } else { %> 

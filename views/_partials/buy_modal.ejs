@@ -1,0 +1,36 @@
+<div class="modal fade" id="buy-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">You are buying</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <h3 text="center">Confirm to buy?</h3>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal">No</button>
+        <button id="yes-btn" class="btn btn-primary">Yes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+  $(document).ready(function() {
+    $("#yes-btn").on('click', function(e) {
+      const itemID = $('#buy-modal').data('id')
+      axios({
+        url: `/api/my/auction/${itemID}/buy`,
+        method: 'PUT'
+      }).then(function() {
+        window.location.href = '/'
+      }).catch(function(error) {
+        console.log(error.response)
+      })
+    })
+  })
+</script>
+

@@ -23,7 +23,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    UserId: {
+    OwnerId: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    BuyerId: {
       type: DataTypes.INTEGER,
       allowNull: true
     }

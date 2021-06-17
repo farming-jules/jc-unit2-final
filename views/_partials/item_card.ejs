@@ -1,15 +1,15 @@
 <div class="card" style="width: 18rem;">
+  <a href="/auction/<%= item.id %>">
+    <img class="card-img-top" src="<%= item.image %>" alt="Card image">
+  </a>
   <div class="card-body">
     <h5 class="card-title"><%= item.title %></h5>
+    <h5 class="card-title">$<%= item.price %></h5>
     <p class="card-text"><%= item.description %></p>
-  </div>
-  <img class="card-img-top" src="<%= item.image %>" alt="Card image cap">
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item"><%= item.price %></li>
-    <li class="list-group-item"><%= item.description %></li>
-  </ul>
-  <div class="card-body">
-    <button type="button" class="btn btn-warning">Buy</button>
+    <a class="buy-btn btn btn-info" href="/auction/<%= item.id %>">More</a>
+    <% if (buyable) { %> 
+      <button class="buy-btn btn btn-warning" data-id="<%= item.id %>">Buy</button>
+    <% } %> 
   </div>
 </div>
 

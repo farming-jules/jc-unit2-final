@@ -1,6 +1,5 @@
-<!-- copy from login modal -->
 <!-- Modal -->
-<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -40,14 +39,13 @@
     $("#login-btn").click(function() {
       $.post("/api/auth/login", $("#loginForm").serialize()).done(function(data) {
         window.location.href = "/"
-        console.log('hi')
       }).fail(function(xhr) {
         switch(xhr.status) {
           case 401: // Credentials is incorrect
           case 404: // User not found with email
             $('#login-form-msg').text(xhr.responseJSON.message)
             break
-          case 406: //no input. this is complete
+          case 406: //no input
             $(`#loginForm .is-invalid`).removeClass('is-invalid')
             $('#loginForm .invalid-feedback').text('')
 
@@ -65,41 +63,3 @@
     })
   })
 </script>
-
-<script>
-  // $(document).ready(function() {
-  //   $('#signup-modal').on('show.bs.modal', function (event) {
-  //     $('#signupForm')[0].reset()
-  //     $(`#signupForm .is-invalid`).removeClass('is-invalid')
-  //     $('#signupForm .invalid-feedback').text('')
-  //   })
-
-  //   $('#signupForm').on('input', '.is-invalid', function(e) {
-  //     $(e.target).removeClass('is-invalid').siblings('.invalid-feedback').text('')
-  //   })
-
-  //   $("#signup-btn").click(function() {
-  //     // let formData = $("#signupForm").serializeArray()
-  //     $.post("/api/auth/signup", $("#signupForm").serialize()).done(function(data) {
-  //       $('#signup-modal').modal('hide')
-  //       $('#login-modal').modal('show')
-  //     }).fail(function(xhr) {
-  //       switch(xhr.status) {
-  //         case 406:
-  //           $(`#signupForm .is-invalid`).removeClass('is-invalid')
-  //           $('#signupForm .invalid-feedback').text('')
-
-  //           xhr.responseJSON.errors.forEach(function(errorObj) {
-  //             const $input = $(`#signupForm [name="${errorObj.param}"]`)
-  //             const $feedback = $input.siblings('.invalid-feedback')
-  //             $input.addClass('is-invalid')
-  //             $feedback.text(errorObj.msg)
-  //           })
-  //           break;
-  //         default:
-  //           console.log(xhr)
-  //       }
-  //     })
-  //   })
-  // }) 
-  </script>

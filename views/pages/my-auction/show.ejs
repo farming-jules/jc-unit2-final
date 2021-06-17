@@ -2,16 +2,56 @@
 <title>Auction Show</title>
 <%- contentFor('styles') %>
 <%- contentFor('scripts') %>
+<script>
+$(document).ready(function(){
+  $("#edit-btn").on('click', function(e) {
+    //find the itemID , change content save into the same instance
+    const itemID = $('#my-auction-show').data('id')
+    axios({
+        url: `/api/my/auction/${itemID}`,
+        method: 'PUT'
+      }).then(function() {
+        window.location.href = '/'
+      }).catch(function(error) {
+        console.log(error.response)
+      })
+  })
+
+  $("#delete-btn").on('click', function(e) {
+    const itemID = $('#my-auction-show').data('id')
+    axios({
+      url: `/api/my/auction/${itemID}`,
+      method: 'DELETE'
+    }).then(function() {
+      window.location.href = '/'
+    }).catch(function(error) {
+      console.log(error.response)
+    })
+  })
+})
+</script>
+
 <%- contentFor('body') %>
-<div id="my-auction-show" class="container my-3 text-center">
-  <h1 class="my-3"> Showing all Auction <span><%= auction.id %></span></h1>
+<div id="my-auction-show" data-id="<%= auction.id %>" class="container text-center"> 
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <a id="edit-btn" type="button" class="btn btn-info btn-lg" href="/auction/<%= auction.id %>/edit">Edit</a>
+    <button id="delete-btn" type="button" class="btn btn-secondary btn-lg">Delete</button>
+  </div>
+    
+  <h1 class="show-item"> Showing One Item <span><%= auction.id %></span></h1>
   <img
-    class="mr-3 mb-3"
-    src="<%= auction.User && auction.User.image ? auction.User.image : 'https://i1.wp.com/www.mnleadership.org/wp-content/uploads/2017/02/Anonymous-Avatar.png?ssl=1' %>"
+    class="m"
+    src="<%= auction.Owner && auction.Owner.image ? auction.Owner.image : 'https://i1.wp.com/www.mnleadership.org/wp-content/uploads/2017/02/Anonymous-Avatar.png?ssl=1' %>"
     alt="image"
     style="width: 100px; height: auto;"
   >
-  <h1 class="mb-3"><%= auction.title %></h1>
-  <h2 class="mb-3"><%= auction.description%></h2>
-  <h2 class="mb-3"><%= auction.price%></h2>
+  <h1 class="m"><%= auction.title %></h1>
+  <h2 class="m"><%= auction.description%></h2>
+  <h2 class="m"><%= auction.price%></h2>
+  <img
+    class="m"
+    src="<%= auction.image || 'https://i1.wp.com/www.mnleadership.org/wp-content/uploads/2017/02/Anonymous-Avatar.png?ssl=1' %>"
+    alt="image"
+    style="width: 500px; height: auto;"
+  >
 </div>
